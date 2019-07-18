@@ -1,0 +1,27 @@
+#spanheader {
+    color: rgb(228, 163, 24);
+}
+#navbar {
+    background-color: rgb(228, 163, 24) !important;
+    margin-bottom: 5px !important;
+}
+.nav-header {
+    font-size: 20px;
+    font-weight: bold;
+}
+#boutton-inscrire {
+    background-color: rgb(228, 163, 24) !important;
+}
+#carte {
+    box-shadow: 3px 0px 0px rgb(228, 163, 24);
+    padding-left: 70px;
+    margin-top: 50px;
+}
+#imageproduit {
+    border-radius: 5px;
+}
+#nomproduit {
+    font-size: 20px;
+    color: rgb(228, 163, 24);
+    font-weight: bold;
+}
