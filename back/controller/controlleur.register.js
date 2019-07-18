@@ -25,7 +25,8 @@ exports.register = function(req,res) {
                 .then(()=>{
                     Login.find()
                         .then(note=>{
-                            res.send(note);
+                            res.send(insert);
+
                         })
                 })
                 .catch(e=>{
