@@ -2,8 +2,6 @@ var Login = require('../models/model.register');
 var bcrypt = require('bcryptjs');
 var salt = bcrypt.genSaltSync(10);
 
-
-
 exports.register = function(req,res) {
    
     var nomUtilisateur = req.body.nomUtilisateur

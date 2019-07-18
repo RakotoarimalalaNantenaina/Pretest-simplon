@@ -5,9 +5,7 @@ export default class ListTous extends Component {
     constructor(props) {
         super(props);
         this.state = { profil: [] };
-
     }
-
     state = {
         flipped2: false
       }
@@ -17,11 +15,9 @@ export default class ListTous extends Component {
         this.setState({ [cardId]: !this.state[cardId] });
       }
       
-
     componentDidMount() {
         axios.get('http://localhost:8080/produit')
             .then(response => {
-                console.log('i am a response', response)
                 this.setState({ profil: response.data });
             })
             .catch(function (error) {
@@ -29,9 +25,8 @@ export default class ListTous extends Component {
             })
     }
 
-    liste() {
+    Produit() {
         return <div className="container-fluid">
-           
                 <div className="row view-group" id="colonne">
                     {this.state.profil.length > 0 ? (
 
@@ -41,7 +36,7 @@ export default class ListTous extends Component {
 
                                 <div className="card card-cascade narrower card-ecommerce">
 
-                                        <img width="auto" id="imageproduit" height="150px" src={'http://localhost:8080/user/' + user.photo_produit} alt="ima" />
+                                        <img width="auto" id="imageproduit" height="150px" src={'http://localhost:8080/produit/' + user.photo_produit} alt={user.photo_produit} />
                                         
                                     <div className="card-body card-body-cascade">
 
@@ -49,16 +44,14 @@ export default class ListTous extends Component {
 
                                         <p className="card-text"><strong><span id="description">Description</span></strong>&nbsp;&nbsp; <div id="point">{user.description}</div> </p>
                                         <span className="spanprix">
-                                            <strong>Prix: </strong>
+                                            <strong>Prix: {user.prix} Ar</strong>
                                         </span><br />
 
                                         <span class="float-right">
 
                                             <span class="float-right">
-                                                <a data-toggle="tooltip" data-placement="top" title="Ajouter au panier">
+                                                <a href="#!" data-toggle="tooltip" data-placement="top" title="Ajouter au panier">
                                                     <i class="fas fa-shopping-cart grey-text ml-3"></i>
-                                                </a>
-                                                <a data-toggle="tooltip" data-placement="top" title="J'adore">
                                                 </a>
                                             </span>
 
@@ -73,7 +66,9 @@ export default class ListTous extends Component {
 
                         ))
                     ) : (
-                            <div></div>
+                            <div>
+                                <h3 id="h3vide">Aucun Produit à vendre</h3>
+                            </div>
                         )}
                 </div>
           
@@ -82,7 +77,7 @@ export default class ListTous extends Component {
     render() {
         return (
             <div>
-                {this.liste()}
+                {this.Produit()}
             </div>
         );
     }
