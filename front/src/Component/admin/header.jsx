@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline } from "mdbreact";
-import { MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput } from "mdbreact";
+import { MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBRow, MDBInput } from "mdbreact";
 import { Redirect } from 'react-router-dom';
 const axios = require('axios');
 class SideNavPage extends Component {
@@ -12,7 +12,7 @@ class SideNavPage extends Component {
     modal4: false,
     modal5: false,
     collapseID: "",
-    redirect: false
+    redirect: false,
   }
 
   constructor(props) {
@@ -32,16 +32,20 @@ class SideNavPage extends Component {
       redirect: true
     })
   }
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to='/admin' />
-    }
-  }
- 
+
   onChange(event) {
     this.setState({
         [event.target.name]: event.target.value
     })
+}
+
+renderRedirect = () => {
+  if (localStorage.getItem('nom')=='true') {
+    return <Redirect to='/admin' />
+  }
+}
+conn = () => {
+  localStorage.setItem('nom', 'true')
 }
 
 register() {
@@ -52,9 +56,30 @@ register() {
 })
     .then(function (response) {
         console.log('response', response.data);
-    localStorage.setItem('myData', response.data._id)
-     
-    console.log('local STORAGE :',localStorage.getItem('myData'));
+        localStorage.setItem('id', 'true')
+    console.log('local STORAGE :',localStorage.getItem('id'));
+
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+}
+
+
+
+login() {
+  axios.post('http://localhost:8080/login', {
+    nomUtilisateur: this.state.nomUtilisateur,
+    email: this.state.email,
+    password: this.state.password
+})
+    .then(function (response) {
+
+      console.log('response', response.data);
+      localStorage.setItem('nom', 'true')
+
+      console.log('local STORAGE :',localStorage.getItem('nom'));
+
     })
     .catch(function (error) {
         console.log(error);
@@ -67,9 +92,6 @@ register() {
     this.setState(prevState => ({
       collapseID: prevState.collapseID !== collapseID ? collapseID : ""
     }));
-
-    
-  
     toggle = nr => () =>  {
       let modalNumber = "modal" + nr;
       this.setState({
@@ -82,7 +104,7 @@ register() {
     return (
       <div>
          {this.renderRedirect()}
-        <MDBNavbar color="red" dark expand="md" style={{ marginTop: "20px" }} id="navbar">
+        <MDBNavbar color="red" dark expand="md" style={{ marginTop: "1px" }} id="navbar">
           <MDBNavbarBrand>
             <strong className="white-text">E-COM</strong>
           </MDBNavbarBrand>
@@ -90,22 +112,22 @@ register() {
           <MDBCollapse id="navbarCollapse3" isOpen={this.state.collapseID} navbar>
             <MDBNavbarNav left>
               <MDBNavItem >
-                <MDBNavLink to="#!" className="nav-header">A propos</MDBNavLink>
+                <MDBNavLink to="" className="nav-header">A propos</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink to="#!" className="nav-header">Produits</MDBNavLink>
+                <MDBNavLink to="" className="nav-header">Produits</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink to="#!" className="nav-header">Contacts</MDBNavLink>
+                <MDBNavLink to="" className="nav-header">Contacts</MDBNavLink>
               </MDBNavItem>
 
             </MDBNavbarNav>
             <MDBNavbarNav right>
               <MDBNavItem>
-                <MDBNavLink to="#!" className="nav-header" rounded onClick={this.toggle(1)}>Connexion</MDBNavLink>
+                <MDBNavLink to="" className="nav-header" rounded onClick={this.toggle(1)}>Connexion</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink to="#!" className="nav-header" rounded onClick={this.toggle(2)}>Inscription</MDBNavLink>
+                <MDBNavLink to="" className="nav-header" rounded onClick={this.toggle(2)}>Inscription</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
                 <MDBFormInline waves>
@@ -117,12 +139,17 @@ register() {
             </MDBNavbarNav>
           </MDBCollapse>
         </MDBNavbar>
-
+        
 
        
       {/* CONNEXION */}
 
         <MDBRow>
+        <form className="mx-3 grey-text" onSubmit={e => {
+                            e.preventDefault()
+                            this.login()
+                            this.conn()   
+                            }} >
           <MDBModal isOpen={this.state.modal1} toggle={this.toggle(1)}>
             <MDBModalHeader
               className="text-center"
@@ -132,29 +159,29 @@ register() {
               Connexion
             </MDBModalHeader>
             <MDBModalBody>
-              <form className="mx-3 grey-text">
+
                 <MDBInput
                   label="taper votre e-mail"
                   icon="envelope"
                   group
-                  type="email"
+                  type="text"
                   validate
                   error="wrong"
-                  success="right"
+                  success="right" value={this.state.nomUtilisateur}  onChange={this.onChange} name="nomUtilisateur"
                 />
                 <MDBInput
                   label="taper votre mot de passe"
                   icon="lock"
                   group
-                  type="password"
-                  validate
+                  type="password" 
+                  validate value={this.state.password}  onChange={this.onChange} name="password"
                 />
-              </form>
-            </MDBModalBody>
-            <MDBModalFooter className="justify-content-center">
-              <MDBBtn color="deep-orange" onClick={this.toggle(1)}>Connecter</MDBBtn>
+             </MDBModalBody>
+             <MDBModalFooter className="justify-content-center">
+              <button id="boutton-inscrire" className="btn btn-primary" type="submit">Se connecter</button>
             </MDBModalFooter>
           </MDBModal>
+          </form>
         </MDBRow>
 
           {/* Inscription */}

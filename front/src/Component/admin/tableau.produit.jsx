@@ -41,7 +41,7 @@ export default class Tableau extends Component {
                                     <td>{obj.description}</td>
                                     <td>{obj.prix}  Ar</td>
                                 </tr>
-                            })) : ('Aucun produit')
+                            })) : ('Aucun produit à vendre')
                         }
                     </tbody>
                 </table>
