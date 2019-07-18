@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Header from './Component/admin/header';
+import Produit from './Component/admin/Listeproduit';
 
 
 class Accueil extends Component {
@@ -7,6 +9,7 @@ class Accueil extends Component {
     let imgUrl = 'https://mdbootstrap.com/img/Photos/Others/forest2.jpg'; 
     return (
       <div className="">
+      <Header/>
         <div class="card card-image" id="header" style={{backgroundImage: 'url(' + imgUrl + ')', 
                                                           backgroundSize: 'cover', backgroundPosition: 'center center',backgroundRepeat: 'no-repeat',}}>
           <div class="text-white text-center rgba-stylish-strong py-5 px-4">
@@ -18,6 +21,7 @@ class Accueil extends Component {
             </div>
           </div>
         </div>
+        <Produit/>
       </div>
     )
   }

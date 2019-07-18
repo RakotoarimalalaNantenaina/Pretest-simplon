@@ -1,4 +1,5 @@
 import React from 'react';
+import { MDBIcon,MDBCol,MDBInput,MDBCard, MDBCardBody} from "mdbreact";
 
 class PostFrontToBack extends React.Component {
   constructor(props) {
@@ -11,21 +12,15 @@ class PostFrontToBack extends React.Component {
       prix: ''
 
     };
+
     this.onChange = this.onChange.bind(this)
     this.handleUploadImage = this.handleUploadImage.bind(this);
   }
-
-
-
-
   onChange(event) {
     this.setState({
         [event.target.name]: event.target.value
     })
 }
-
-
-
   handleUploadImage(ev) {
     ev.preventDefault();
 
@@ -49,18 +44,55 @@ class PostFrontToBack extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleUploadImage}>
-        <label>Titre:</label>
-        <input type="text" value={this.state.value}  onChange={this.onChange} name="titre" /><br></br>
-        <label>Description:</label>
-        <input type="text" value={this.state.value} onChange={this.onChange}  name="description" /><br></br>
-        <input type="text" value={this.state.value} onChange={this.onChange}  name="prix" /><br></br>
-        <label>Images de votre produit</label>
-             
-          <input ref={(ref) => { this.uploadInput = ref; }} type="file" name="photo_produit"/><br/>
-       
-          <button>Ajouter votre produit</button>
-      </form>
+        <div> 
+        <center>
+      <MDBCol md="6">
+            <MDBCard width="50%">
+              <MDBCardBody>
+                <form  onSubmit={this.handleUploadImage}>
+                  <p className="h4 text-center py-4">Ajouter votre produit</p>
+                  <div className="grey-text">
+                    <MDBInput
+                      label="Nom du produit"
+                      group
+                      type="text"
+                      validate
+                      error="wrong"
+                      success="right" value={this.state.value}  onChange={this.onChange} name="titre"
+                    />
+                    <MDBInput
+                      label="Déscription"
+                      group
+                      type="text"
+                      validate
+                      error="wrong"
+                      success="right" value={this.state.value} onChange={this.onChange} name="description"
+                    />
+                    <MDBInput
+                      label="Prix"
+                      group
+                      type="text"
+                      validate
+                      error="wrong"
+                      success="right" value={this.state.value} onChange={this.onChange}  name="prix"
+                    />
+                  <label>Images de votre produit : </label>  
+                  <input ref={(ref) => { this.uploadInput = ref; }} type="file" name="photo_produit"/>
+                  </div>
+                  <div className="text-center">
+                  <div className="text-center mt-4">
+                <button className="btn btn-outline-warning" type="submit">
+                  Ajouter
+                  <MDBIcon icon="paper-plane" className="ml-2" />
+                </button>
+              </div>
+              </div>
+                </form>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+          </center>
+      </div>
     );
   }
 }

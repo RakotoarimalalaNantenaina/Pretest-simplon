@@ -51,8 +51,10 @@ register() {
     password: this.state.password
 })
     .then(function (response) {
-      localStorage.setItem('Profil', response.data.nomUtilisateur);
-       console.log('get item io e :',localStorage.setItem('Profil'));
+        console.log('response', response.data);
+    localStorage.setItem('myData', response.data._id)
+     
+    console.log('local STORAGE :',localStorage.getItem('myData'));
     })
     .catch(function (error) {
         console.log(error);
@@ -117,10 +119,52 @@ register() {
         </MDBNavbar>
 
 
+       
+      {/* CONNEXION */}
+
+        <MDBRow>
+          <MDBModal isOpen={this.state.modal1} toggle={this.toggle(1)}>
+            <MDBModalHeader
+              className="text-center"
+              titleClass="w-100 font-weight-bold"
+              toggle={this.toggle(1)}
+            >
+              Connexion
+            </MDBModalHeader>
+            <MDBModalBody>
+              <form className="mx-3 grey-text">
+                <MDBInput
+                  label="taper votre e-mail"
+                  icon="envelope"
+                  group
+                  type="email"
+                  validate
+                  error="wrong"
+                  success="right"
+                />
+                <MDBInput
+                  label="taper votre mot de passe"
+                  icon="lock"
+                  group
+                  type="password"
+                  validate
+                />
+              </form>
+            </MDBModalBody>
+            <MDBModalFooter className="justify-content-center">
+              <MDBBtn color="deep-orange" onClick={this.toggle(1)}>Connecter</MDBBtn>
+            </MDBModalFooter>
+          </MDBModal>
+        </MDBRow>
+
+          {/* Inscription */}
+
         <MDBRow id="test">
         <form className="mx-3 grey-text" onSubmit={e => {
                             e.preventDefault()
                             this.register()
+                            this.setRedirect()
+                            document.getElementById('test').style.display = 'none'
                             }} >
          
           <MDBModal isOpen={this.state.modal2} toggle={this.toggle(2)}>
@@ -160,49 +204,12 @@ register() {
                 />
             </MDBModalBody>
             <MDBModalFooter className="justify-content-center">
-              <button id="boutton-inscrire" className="btn btn-primary" onClick={()=>{
-                this.setRedirect()
-                document.getElementById('test').style.display = 'none'
-                }}>S'inscrire</button>
+              <button id="boutton-inscrire" className="btn btn-primary" type="submit">S'inscrire</button>
             </MDBModalFooter>
           </MDBModal>
           </form>
         </MDBRow>
 
-        <MDBRow>
-          <MDBModal isOpen={this.state.modal1} toggle={this.toggle(1)}>
-            <MDBModalHeader
-              className="text-center"
-              titleClass="w-100 font-weight-bold"
-              toggle={this.toggle(1)}
-            >
-              Connexion
-            </MDBModalHeader>
-            <MDBModalBody>
-              <form className="mx-3 grey-text">
-                <MDBInput
-                  label="taper votre e-mail"
-                  icon="envelope"
-                  group
-                  type="email"
-                  validate
-                  error="wrong"
-                  success="right"
-                />
-                <MDBInput
-                  label="taper votre mot de passe"
-                  icon="lock"
-                  group
-                  type="password"
-                  validate
-                />
-              </form>
-            </MDBModalBody>
-            <MDBModalFooter className="justify-content-center">
-              <MDBBtn color="deep-orange" onClick={this.toggle(1)}>Connecter</MDBBtn>
-            </MDBModalFooter>
-          </MDBModal>
-        </MDBRow>
 
 
       </div>
