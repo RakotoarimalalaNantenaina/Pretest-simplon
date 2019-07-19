@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import ReactImageMagnify from 'react-image-magnify';
 
 export default class ListTous extends Component {
     constructor(props) {
@@ -36,7 +37,21 @@ export default class ListTous extends Component {
 
                                 <div className="card card-cascade narrower card-ecommerce">
 
-                                        <img width="auto" id="imageproduit" height="150px" src={'http://localhost:8080/produit/' + user.photo_produit} alt={user.photo_produit} />
+                                {/* <ReactImageMagnify id="imageproduit" {...{
+                                                                            smallImage: {
+                                                                                alt: user.photo_produit,
+                                                                                isFluidWidth: true,
+                                                                                src: 'http://localhost:8080/produit/' + user.photo_produit,
+                                                                            },
+                                                                            largeImage: {
+                                                                                src: 'http://localhost:8080/produit/' + user.photo_produit,
+                                                                                width: 1000,
+                                                                                height: 1400
+                                                                            }
+                                                                        }} id="imageproduit" className="img-fluid"/> */}
+                                
+                                        
+                                        <img   width="auto" id="imageproduit" height="150px" src={'http://localhost:8080/produit/' + user.photo_produit} alt={user.photo_produit} />
                                         
                                     <div className="card-body card-body-cascade">
 

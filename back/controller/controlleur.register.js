@@ -51,6 +51,7 @@ exports.register = function(req,res) {
                     if(bcrypt.compareSync(password, note[i].password)&&(nomUtilisateur===note[i].nomUtilisateur||nomUtilisateur===note[i].email)){
                         r=true
                         res.send(note[i].nomUtilisateur)
+                        i=note.length;
                     }
                 }
                 if(!r){

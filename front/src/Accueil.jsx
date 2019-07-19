@@ -8,7 +8,7 @@ class Accueil extends Component {
   render() {
     let imgUrl = 'https://mdbootstrap.com/img/Photos/Others/forest2.jpg'; 
     return (
-      <div className="">
+      <div className="container-fluid">
       <Header/>
         <div class="card card-image" id="header" style={{backgroundImage: 'url(' + imgUrl + ')', 
                                                           backgroundSize: 'cover', backgroundPosition: 'center center',backgroundRepeat: 'no-repeat',}}>
