@@ -5,9 +5,9 @@ module.exports = (app) => {
     app.post('/produit', produit.create);
     app.get('/produit', produit.findAll);
     app.get('/produit/:image', produit.lireImage);
+    // app.get('/produit/:id', produit.onproduit);
 
     app.post('/register', profil.register);
     app.post('/login', profil.login);
-    app.get('/profils', profil.profils)
-    
+    app.get('/profils', profil.profils)   
 }

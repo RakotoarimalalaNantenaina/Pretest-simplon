@@ -4,6 +4,8 @@
 #navbar {
     background-color: rgb(228, 163, 24) !important;
     margin-bottom: 5px !important;
+    width: 96%;
+    margin-left: 2%;
 }
 .nav-header {
     font-size: 20px;
@@ -18,7 +20,7 @@
     margin-top: 50px;
 }
 #imageproduit {
-    border-radius: 5px;
+    border-radius: 5px !important;
 }
 #nomproduit {
     font-size: 20px;

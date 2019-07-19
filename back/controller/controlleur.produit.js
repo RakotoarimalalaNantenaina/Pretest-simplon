@@ -88,3 +88,13 @@ exports.lireImage =(req, res) =>{
         console.log("ts lasa le sary o", e.stack);
     }
 }
+
+// exports.lireImage =(req, res) =>{
+//     try {
+        
+//         res.write(picture)
+//         res.end()
+//     } catch (e) {
+//         console.log("ts lasa le sary o", e.stack);
+//     }
+// }
